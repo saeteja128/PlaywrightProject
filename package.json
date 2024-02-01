@@ -1,0 +1,27 @@
+{
+  "name": "playwrightproject",
+  "version": "1.0.0",
+  "description": "Creating a sample Automation Project based on the learning",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/saeteja128/PlaywrightProject.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/saeteja128/PlaywrightProject/issues"
+  },
+  "homepage": "https://github.com/saeteja128/PlaywrightProject#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.41.1",
+    "@types/mocha": "^10.0.6",
+    "@types/node": "^20.11.10"
+  },
+  "dependencies": {
+    "csv": "^6.3.6",
+    "csv-parse": "^5.5.3"
+  }
+}
