@@ -1,13 +1,15 @@
 import { test, Page } from "@playwright/test";
 import { SIGNINPAGE, signincolumns } from "../pomPages/signIn";
 import COMMONBASE, { fileContent } from "../pomPages/commonBase";
-import { PRODUCTSELECTION } from "../pomPages/productSelection";
+import { PRODUCTCATEGORYSELECTION } from "../pomPages/productCategorySelection";
 import { parse } from "csv-parse/sync";
+import { COMPARINGPRODUCTS } from "../pomPages/comparingProduct";
 
 let page: Page;
 let signInPage: SIGNINPAGE;
 let commonBase: COMMONBASE;
-let productSelection: PRODUCTSELECTION;
+let productCategorySelection: PRODUCTCATEGORYSELECTION;
+let comparingProducts: COMPARINGPRODUCTS;
 
 let url: string = "https://magento.softwaretestingboard.com/";
 
@@ -15,7 +17,8 @@ test.beforeAll(async ({ browser }) => {
   page = await browser.newPage();
   signInPage = new SIGNINPAGE(page);
   commonBase = new COMMONBASE(page);
-  productSelection = new PRODUCTSELECTION(page);
+  productCategorySelection = new PRODUCTCATEGORYSELECTION(page);
+  comparingProducts = new COMPARINGPRODUCTS(page);
 });
 test.use({
   viewport: { width: 1536, height: 776 },
@@ -32,8 +35,9 @@ const signinrecords: any = parse(fileContent, {
 });
 
 let csvCount: number;
-csvCount = signinrecords.length;
+csvCount = signinrecords.length;2
 console.log("Result", signinrecords);
+
 
 test.describe("Performing the End to End TC of an e-Commerce Website", () => {
   for (let i = 0; i < csvCount; i++) {
@@ -47,9 +51,15 @@ test.describe("Performing the End to End TC of an e-Commerce Website", () => {
       });
 
       await test.step("Navigating to the Product Category Page ", async () => {
-        await productSelection.HoveringOnMenDropDown();
-        await productSelection.HoveringOnTopsDropDown();
-        await productSelection.SelectiongHoodiesOption();
+        await productCategorySelection.HoveringOnMenDropDown();
+        await productCategorySelection.HoveringOnTopsDropDown();
+        await productCategorySelection.SelectiongHoodiesOption();
+      });
+
+      await test.step("Selecting the Product using the Filters ", async () => {
+        await comparingProducts.SelectingSizeFilter();
+        await comparingProducts.SelectingColorFilter();
+        await comparingProducts.SelectingPatternFilter();
       });
     });
   }
