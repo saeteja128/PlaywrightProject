@@ -1,40 +1,81 @@
 import { Page, expect } from "@playwright/test";
 import COMMONBASE from "./commonBase";
 
+interface categoryRecords {
+  gender: string;
+  apparel_type: string;
+  product_type: string;
+}
+
+export const categoryColumns = ["gender", "apparel_type", "product_type"];
+
+let GenderType: string;
+let ApparelType: string;
+let ProductType: string;
+
 export class PRODUCTCATEGORYSELECTION extends COMMONBASE {
   constructor(page: Page) {
     super(page);
   }
 
-  MenDropDown = () =>
+  GenderDropDown = () =>
     this.page.locator(
-      "//a[@href='https://magento.softwaretestingboard.com/men.html']/span[contains(text(), 'Men')]"
+      "//div[@class='section-item-content nav-sections-item-content']/nav/ul/li/a/span[contains(text(),'" +
+        GenderType +
+        "')]"
     );
 
-  TopsDropDown = () =>
+  ApparelDropDownWomen = () =>
     this.page.locator(
-      "//a[@href='https://magento.softwaretestingboard.com/men/tops-men.html']/span[contains(text(), 'Tops')]"
+      "//div[@class='section-item-content nav-sections-item-content']/nav/ul/li/ul/li/a[contains(@href,'women')]/span[contains(text(),'" +
+        ApparelType +
+        "')]"
     );
 
-  HoodiesOption = () =>
+  ApparelDropDownMen = () =>
     this.page.locator(
-      "//a[@href='https://magento.softwaretestingboard.com/men/tops-men/hoodies-and-sweatshirts-men.html']/span[contains(text(), 'Hoodies & Sweatshirts')]"
+      "//div[@class='section-item-content nav-sections-item-content']/nav/ul/li/ul/li/a[contains(@href,'men')]/span[contains(text(),'" +
+        ApparelType +
+        "')]"
     );
 
-  async HoveringOnMenDropDown(): Promise<void> {
+  ProductTypeButton = () =>
+    this.page.locator(
+      "//div[@class='section-item-content nav-sections-item-content']/nav/ul/li/ul/li/ul/li/a/span[contains(text(),'" +
+        ProductType +
+        "')]"
+    );
+
+  async HoveringOnGenderDropDown(GenderValue: string): Promise<void> {
+    GenderType = GenderValue;
     await this.loadStateDomContent();
-    await this.MenDropDown().hover();
-    console.log("Hovered on the Men Drop down menu option successfully");
+    await this.GenderDropDown().hover();
+    console.log(`Gender Type "${GenderType}" expanded in Header`);
   }
 
-  async HoveringOnTopsDropDown(): Promise<void> {
-    await this.TopsDropDown().hover();
-    console.log("Hovered on the Tops Drop down menu option successfully");
+  async HoveringApparelDropDown(
+    { gender }: categoryRecords,
+    ApparelValue: string
+  ): Promise<void> {
+    ApparelType = ApparelValue;
+    if (gender.trim().toLowerCase() == "men") {
+      await this.ApparelDropDownMen().hover();
+      console.log(
+        `Apparel Type "${ApparelType}" expanded under "${gender} Category" `
+      );
+    } else if (gender.trim().toLowerCase() == "women") {
+      await this.ApparelDropDownWomen().hover();
+      console.log(
+        `Apparel Type "${ApparelType}" expanded under "${gender} Category" `
+      );
+    } else {
+      console.log("Wrong Input provided in the CSV file");
+    }
   }
 
-  async SelectiongHoodiesOption(): Promise<void> {
-    await this.HoodiesOption().click();
-    await this.loadStateDomContent();
-    console.log("Selected the Hoodies & Sweatshirts option successfully");
+  async SelectingProductOption(ProductValue: string): Promise<void> {
+    ProductType = ProductValue;
+    await this.ProductTypeButton().click();
+    console.log(`Product Type "${ProductType}" is selected`);
   }
 }

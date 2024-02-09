@@ -41,10 +41,37 @@ export const tessDataFolder: string =
   root_dir + fileSep + "tests" + fileSep + "testData_Csv";
 console.log("Directory in Common Base: ", tessDataFolder);
 
-export const signinData: string = tessDataFolder + fileSep + "luma_signin.csv";
-console.log("Directory of CSV File: ", signinData);
 
-export const csvFilePath = path.resolve(__dirname, signinData);
-export const fileContent = fs.readFileSync(csvFilePath, { encoding: "utf-8" });
+//File Path related to Signin of the user based on the user input
+export const signinData: string = tessDataFolder + fileSep + "luma_signin.csv";
+export const Signin_csvFilePath = path.resolve(__dirname, signinData);
+export const Signin_fileContent = fs.readFileSync(Signin_csvFilePath, { encoding: "utf-8" });
+
+
+//File Path related to Filters Selection in the Respective Product Page
+export const filterData: string = tessDataFolder + fileSep + "product_selection1.csv";
+export const Filter_csvFilePath = path.resolve(__dirname, filterData);
+export const Filter_fileContent = fs.readFileSync(Filter_csvFilePath, { encoding: "utf-8" });
+
+
+//File Path related to Category Selection of the Product based on the user input
+export const categoryData: string = tessDataFolder + fileSep + "product_category.csv";
+export const Category_csvFilePath = path.resolve(__dirname, categoryData);
+export const Category_fileContent = fs.readFileSync(Category_csvFilePath, { encoding: "utf-8" });
+
+
+//Functions used 
+
+export function removeDigitsAfterDecimalFromArray(inputArray: string[]): string[] {
+  return inputArray.map((inputString) => {
+    let stringWithoutDollar = inputString.replace("$", ""); //Remove Dollar Sign
+    let stringWithoutDecimalDigits = stringWithoutDollar.replace(/\.\d+$/, ""); // Remove digits after decimal point
+    return stringWithoutDecimalDigits;
+  });
+}
+
+export function findLowestValue(numbers: number[]): number | undefined {
+  return Math.min(...numbers);
+}
 
 
