@@ -1,7 +1,7 @@
 import { Page, expect } from "@playwright/test";
 import COMMONBASE from "./commonBase";
 
-interface categoryRecords {
+export interface categoryRecords {
   gender: string;
   apparel_type: string;
   product_type: string;
@@ -27,21 +27,28 @@ export class PRODUCTCATEGORYSELECTION extends COMMONBASE {
 
   ApparelDropDownWomen = () =>
     this.page.locator(
-      "//div[@class='section-item-content nav-sections-item-content']/nav/ul/li/ul/li/a[contains(@href,'women')]/span[contains(text(),'" +
+      "//div[@class='section-item-content nav-sections-item-content']/nav/ul/li/ul/li/a[contains(@href,'-women')]/span[contains(text(),'" +
         ApparelType +
         "')]"
     );
 
   ApparelDropDownMen = () =>
     this.page.locator(
-      "//div[@class='section-item-content nav-sections-item-content']/nav/ul/li/ul/li/a[contains(@href,'men')]/span[contains(text(),'" +
+      "//div[@class='section-item-content nav-sections-item-content']/nav/ul/li/ul/li/a[contains(@href,'-men')]/span[contains(text(),'" +
         ApparelType +
         "')]"
     );
 
-  ProductTypeButton = () =>
+  ProductTypeMenButton = () =>
     this.page.locator(
-      "//div[@class='section-item-content nav-sections-item-content']/nav/ul/li/ul/li/ul/li/a/span[contains(text(),'" +
+      "//div[@class='section-item-content nav-sections-item-content']/nav/ul/li/ul/li/ul/li/a[contains(@href,'-men')]/span[contains(text(),'" +
+        ProductType +
+        "')]"
+    );
+
+  ProductTypeWomenButton = () =>
+    this.page.locator(
+      "//div[@class='section-item-content nav-sections-item-content']/nav/ul/li/ul/li/ul/li/a[contains(@href,'-women')]/span[contains(text(),'" +
         ProductType +
         "')]"
     );
@@ -54,28 +61,55 @@ export class PRODUCTCATEGORYSELECTION extends COMMONBASE {
   }
 
   async HoveringApparelDropDown(
-    { gender }: categoryRecords,
+    GenderValue: string,
     ApparelValue: string
   ): Promise<void> {
+    GenderType = GenderValue;
     ApparelType = ApparelValue;
-    if (gender.trim().toLowerCase() == "men") {
-      await this.ApparelDropDownMen().hover();
-      console.log(
-        `Apparel Type "${ApparelType}" expanded under "${gender} Category" `
-      );
-    } else if (gender.trim().toLowerCase() == "women") {
-      await this.ApparelDropDownWomen().hover();
-      console.log(
-        `Apparel Type "${ApparelType}" expanded under "${gender} Category" `
-      );
-    } else {
-      console.log("Wrong Input provided in the CSV file");
+    switch (GenderType.trim().toLowerCase()) {
+      case "men":
+        await this.ApparelDropDownMen().hover();
+        console.log(
+          `Apparel Type "${ApparelType}" expanded under "${GenderType} Category" `
+        );
+        break;
+
+      case "women":
+        await this.ApparelDropDownWomen().hover();
+        console.log(
+          `Apparel Type "${ApparelType}" expanded under "${GenderType} Category" `
+        );
+        break;
+
+      default:
+        console.log("Wrong Input provided in the CSV file");
     }
   }
 
-  async SelectingProductOption(ProductValue: string): Promise<void> {
+  async SelectingProductOption(
+    GenderValue: string,
+    ProductValue: string
+  ): Promise<void> {
+    GenderType = GenderValue;
     ProductType = ProductValue;
-    await this.ProductTypeButton().click();
-    console.log(`Product Type "${ProductType}" is selected`);
+    switch (GenderType.trim().toLowerCase()) {
+      case "men":
+        console.log(GenderType.trim().toLowerCase());
+        await this.ProductTypeMenButton().click();
+        console.log(
+          `Product Type "${ProductType}" expanded under "${GenderType} Category" `
+        );
+        break;
+
+      case "women":
+        await this.ProductTypeWomenButton().click();
+        console.log(
+          `Product Type "${ProductType}" expanded under "${GenderType} Category" `
+        );
+        break;
+
+      default:
+        console.log("Wrong Input provided in the CSV file");
+    }
   }
 }

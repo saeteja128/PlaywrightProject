@@ -1,7 +1,7 @@
 import { Page } from "@playwright/test";
 import COMMONBASE, { findLowestValue, removeDigitsAfterDecimalFromArray } from "./commonBase";
 
-interface filterRecords {
+export interface filterRecords {
   filter_type: string;
   filter_content: string;
 }
@@ -44,18 +44,12 @@ export class COMPARINGPRODUCTS extends COMMONBASE {
         "')]"
     );
 
-  GettingPriceOfProducts = () =>
-    this.page.locator(
-      "//div[@class='price-box price-final_price']/span/span/span/span"
-    );
-
   async SelectingFilterType(
     FilterValue: string,
     FilterOption: string
   ): Promise<void> {
     FilterType = FilterValue;
     FilterTypeOption = FilterOption;
-
     switch (FilterType.trim().toLowerCase()) {
       case "size":
         await this.loadState();
@@ -93,13 +87,5 @@ export class COMPARINGPRODUCTS extends COMMONBASE {
       default:
         console.log("Filter Type Not Provided");
     }
-  }
-
-  async AddingProductToCart(): Promise<void> {
-    let resultArray: string[];
-    resultArray = await this.GettingPriceOfProducts().allTextContents();
-    let PriceArray: any[] = removeDigitsAfterDecimalFromArray(resultArray);
-    let LowestProductValue: any = findLowestValue(PriceArray);
-    console.log(`The lowest value is: `, LowestProductValue);
   }
 }
