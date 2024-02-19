@@ -17,6 +17,8 @@ import COMMONBASE, {
 } from "../pomPages/commonBase";
 import { ADDINGTOCART, addCartColumns } from "../pomPages/addingToCart";
 import { VIEWINGCART } from "../pomPages/viewingCart";
+import { SHIPPINGMETHOD } from "../pomPages/shippingMethod";
+import { REVIEW } from "../pomPages/review_Payments";
 
 let page: Page;
 let signInPage: SIGNINPAGE;
@@ -25,6 +27,8 @@ let productCategorySelection: PRODUCTCATEGORYSELECTION;
 let comparingProducts: COMPARINGPRODUCTS;
 let addingToCart: ADDINGTOCART;
 let viewingCart: VIEWINGCART;
+let shippingMethod: SHIPPINGMETHOD;
+let review: REVIEW;
 
 let url: string = "https://magento.softwaretestingboard.com/";
 
@@ -36,6 +40,8 @@ test.beforeAll(async ({ browser }) => {
   comparingProducts = new COMPARINGPRODUCTS(page);
   addingToCart = new ADDINGTOCART(page);
   viewingCart = new VIEWINGCART(page);
+  shippingMethod = new SHIPPINGMETHOD(page);
+  review = new REVIEW(page);
 });
 
 test.use({
@@ -86,6 +92,7 @@ console.log("Records of Selected Filters CSV File", addCartRecords);
 test.describe("Performing the End to End TC of an e-Commerce Website", () => {
   for (let i = 0; i < Signin_csvCount; i++) {
     test(`Existing User Sign In/New User Account Creation ${i}`, async () => {
+      
       await test.step("Open application & navigating to Website", async () => {
         await commonBase.navigate(url);
       });
@@ -116,15 +123,33 @@ test.describe("Performing the End to End TC of an e-Commerce Website", () => {
           );
         });
       }
+
       await test.step("Selecting the Product using the Filters and Adding it to the Cart ", async () => {
-        await addingToCart.AddingProductToCart(addCartRecords[i],categoryRecords[i]);
+        await addingToCart.AddingProductToCart(
+          addCartRecords[i],
+          categoryRecords[i]
+        );
       });
+      
       await test.step("Viewing and Validating the Product which is added to the Cart", async () => {
         await viewingCart.NavigationgToCartPage();
-        for(let k=0; k<Filter_csvCount;k++)
-        {
-          await viewingCart.ValidatingFilterOfCartProduct(filterRecords[k], filterRecords[k].filter_type, filterRecords[k].filter_content);
+        for (let k = 0; k < Filter_csvCount; k++) {
+          await viewingCart.ValidatingFilterOfCartProduct(
+            filterRecords[k],
+            filterRecords[k].filter_type,
+            filterRecords[k].filter_content
+          );
         }
+        await viewingCart.clickingOnProceedToCheckoutButton();
+      });
+
+      await test.step("Selecting the Shipping Method and navigating to Review & Payments Page ", async () => {
+        await shippingMethod.selectingShippingRadioButton();
+      });
+
+      await test.step("Clicking on Place Order CTA Button", async () => {
+        await review.clickingPlaceOrderCTAButton();
+        await review.clickingOnSignOutButton();
       });
     });
   }

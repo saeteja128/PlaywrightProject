@@ -22,8 +22,11 @@ export class VIEWINGCART extends COMMONBASE {
       "//div[@class='secondary']/a/span[text()='View and Edit Cart']"
     );
   filterInCartPage = () =>
-    this.page.locator("//dl[@class='item-options']/dt[text()='"+FilterType+"']");
-  filterValueInCartPage = () => this.page.locator("//dd[contains(text(),'"+FilterTypeOption+"')]");
+    this.page.locator(
+      "//dl[@class='item-options']/dt[text()='" + FilterType + "']"
+    );
+  filterValueInCartPage = () =>
+    this.page.locator("//dd[contains(text(),'" + FilterTypeOption + "')]");
 
   colorInCartPage = () =>
     this.page.locator(
@@ -31,6 +34,9 @@ export class VIEWINGCART extends COMMONBASE {
     );
   colorValueInCartPage = () =>
     this.page.locator("//dd[contains(text(),'Black')]");
+
+  proceedToCheckoutButton = () =>
+    this.page.locator("//button[@data-role='proceed-to-checkout']");
 
   async NavigationgToCartPage(): Promise<void> {
     await this.loadState();
@@ -42,9 +48,11 @@ export class VIEWINGCART extends COMMONBASE {
     await this.viewAndEditCartLink().click();
   }
 
-  async ValidatingFilterOfCartProduct({
-    filter_type, filter_content
-  }: filterRecords, FilterValue: string, FilterOption: string): Promise<void> {
+  async ValidatingFilterOfCartProduct(
+    { filter_type, filter_content }: filterRecords,
+    FilterValue: string,
+    FilterOption: string
+  ): Promise<void> {
     console.log("Filter Type:", filter_type);
     console.log("Filter Content:", filter_content);
     FilterType = FilterValue;
@@ -53,6 +61,14 @@ export class VIEWINGCART extends COMMONBASE {
     await expect
       .soft(await this.filterValueInCartPage())
       .toHaveText(filter_content);
-    console.log(`Validated the Filter: ${filter_type} and Filter_Value: ${filter_content} successfully`);
+    console.log(
+      `Validated the Filter: ${filter_type} and Filter_Value: ${filter_content} successfully`
+    );
+  }
+
+  async clickingOnProceedToCheckoutButton() {
+    await expect(await this.proceedToCheckoutButton()).toBeVisible({timeout: 50*1000});
+    await this.proceedToCheckoutButton().click();
+    console.log("Clicked the button Proceed to Checkout successfully");
   }
 }
