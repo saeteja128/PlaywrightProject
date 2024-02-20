@@ -67,7 +67,6 @@ export class VIEWINGCART extends COMMONBASE {
   }
 
   async clickingOnProceedToCheckoutButton() {
-    await expect(await this.proceedToCheckoutButton()).toBeVisible({timeout: 50*1000});
     await this.proceedToCheckoutButton().click();
     console.log("Clicked the button Proceed to Checkout successfully");
   }

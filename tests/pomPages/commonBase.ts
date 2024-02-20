@@ -3,9 +3,12 @@ import { Page } from "playwright";
 import { signincolumns } from "./signIn";
 import fs from "fs";
 import { parse } from "csv-parse/sync";
+import { expect } from "@playwright/test";
 
 export default class COMMONBASE {
   protected page: Page;
+
+  // loadCheck = () => this.page.locator("//div[@class='loader']");
 
   constructor(page: Page) {
     this.page = page;
@@ -38,7 +41,7 @@ console.log(root_dir);
 export let fileSep = path.sep;
 console.log(fileSep);
 export const tessDataFolder: string =
-  root_dir + fileSep + "tests" + fileSep + "testData_Csv";
+  root_dir + fileSep + "tests" + fileSep + "testData";
 console.log("Directory in Common Base: ", tessDataFolder);
 
 

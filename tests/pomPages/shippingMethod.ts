@@ -14,6 +14,7 @@ export class SHIPPINGMETHOD extends COMMONBASE {
   shippingMethodNextBUtton = () =>
     this.page.locator("//button[@class='button action continue primary']");
 
+
   async selectingShippingRadioButton() {
     await this.shippingMethodRadioButton().click();
     console.log("Selected the Shipping Method Radio button successfully");

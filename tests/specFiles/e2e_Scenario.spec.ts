@@ -46,9 +46,9 @@ test.beforeAll(async ({ browser }) => {
 
 test.use({
   viewport: { width: 1536, height: 776 },
-  launchOptions: {
-    slowMo: 300, //This option will sets the execution speed of the test.
-  },
+  // launchOptions: {
+  //   slowMo: 300, //This option will sets the execution speed of the test.
+  // },
 });
 
 const signInrecords: any = parse(Signin_fileContent, {
@@ -145,6 +145,7 @@ test.describe("Performing the End to End TC of an e-Commerce Website", () => {
 
       await test.step("Selecting the Shipping Method and navigating to Review & Payments Page ", async () => {
         await shippingMethod.selectingShippingRadioButton();
+        await shippingMethod.clickingNextButton();
       });
 
       await test.step("Clicking on Place Order CTA Button", async () => {

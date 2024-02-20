@@ -20,7 +20,6 @@ export class REVIEW extends COMMONBASE {
     );
 
   async clickingPlaceOrderCTAButton() {
-    await this.loadStateDomContent();
     await this.placeOrderCTAButton().click();
     console.log("Successfully navigated to Thank you Page");
   }
