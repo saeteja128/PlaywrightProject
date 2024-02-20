@@ -1,6 +1,7 @@
-import { Locator, Page, expect } from "@playwright/test";
+import { Page } from "playwright";
 import COMMONBASE from "./commonBase";
 import { filterRecords } from "./selectingFilterOptions";
+import { expect } from "@playwright/test";
 
 let FilterType: string;
 let FilterTypeOption: string;
@@ -58,9 +59,7 @@ export class VIEWINGCART extends COMMONBASE {
     FilterType = FilterValue;
     FilterTypeOption = FilterOption;
     await expect.soft(await this.filterInCartPage()).toHaveText(filter_type);
-    await expect
-      .soft(await this.filterValueInCartPage())
-      .toHaveText(filter_content);
+    await expect.soft(await this.filterValueInCartPage()).toHaveText(filter_content);
     console.log(
       `Validated the Filter: ${filter_type} and Filter_Value: ${filter_content} successfully`
     );

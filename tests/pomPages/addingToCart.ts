@@ -1,4 +1,4 @@
-import { Page } from "@playwright/test";
+import { Page } from "playwright";
 import COMMONBASE, { findHighestValue } from "./commonBase";
 import {
   removeDigitsAfterDecimalFromArray,
@@ -21,7 +21,7 @@ export let HighestProductValue: any;
 
 export class ADDINGTOCART extends COMMONBASE {
   constructor(page: Page) {
-    super(page);
+    super(page)
   }
 
   GettingPriceOfProducts = () =>

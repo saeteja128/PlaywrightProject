@@ -16,12 +16,13 @@
   },
   "homepage": "https://github.com/saeteja128/PlaywrightProject#readme",
   "devDependencies": {
-    "@playwright/test": "^1.41.1",
+    "@playwright/test": "^1.41.2",
     "@types/mocha": "^10.0.6",
-    "@types/node": "^20.11.10"
+    "@types/node": "^20.11.19"
   },
   "dependencies": {
     "csv": "^6.3.6",
-    "csv-parse": "^5.5.3"
+    "csv-parse": "^5.5.3",
+    "playwright": "^1.41.2"
   }
 }
