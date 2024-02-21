@@ -67,6 +67,7 @@ export class VIEWINGCART extends COMMONBASE {
   }
 
   async clickingOnProceedToCheckoutButton() {
+    await this.loadState();
     await this.proceedToCheckoutButton().click();
     console.log("Clicked the button Proceed to Checkout successfully");
   }
