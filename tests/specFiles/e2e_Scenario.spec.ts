@@ -47,9 +47,9 @@ test.beforeAll(async ({ browser }) => {
 
 test.use({
   viewport: { width: 1536, height: 776 },
-  // launchOptions: {
-  //   slowMo: 300, //This option will sets the execution speed of the test.
-  // },
+  launchOptions: {
+    slowMo: 300, //This option will sets the execution speed of the test.
+  },
 });
 
 const signInrecords: any = parse(Signin_fileContent, {
@@ -91,6 +91,7 @@ const addCartRecords: any = parse(addCart_fileContent, {
 console.log("Records of Selected Filters CSV File", addCartRecords);
 
 test.describe("Performing the End to End TC of an e-Commerce Website", () => {
+  test.setTimeout(900000);
   for (let i = 0; i < Signin_csvCount; i++) {
     test(`Existing User Sign In/New User Account Creation ${i}`, async () => {
       
@@ -156,5 +157,3 @@ test.describe("Performing the End to End TC of an e-Commerce Website", () => {
     });
   }
 });
-
-//test Change

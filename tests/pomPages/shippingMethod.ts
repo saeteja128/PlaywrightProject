@@ -14,13 +14,17 @@ export class SHIPPINGMETHOD extends COMMONBASE {
   shippingMethodNextBUtton = () =>
     this.page.locator("//button[@class='button action continue primary']");
 
+    loaderIcon = () => this.page.locator("//div[@data-role='loader']");
+
 
   async selectingShippingRadioButton() {
+    await this.page.waitForTimeout(3000);
     await this.shippingMethodRadioButton().click();
     console.log("Selected the Shipping Method Radio button successfully");
   }
 
   async clickingNextButton() {
+    await this.page.waitForTimeout(1000);
     await this.shippingMethodNextBUtton().click();
     console.log("Clicked the Shipping Method Next CTA button successfully");
   }

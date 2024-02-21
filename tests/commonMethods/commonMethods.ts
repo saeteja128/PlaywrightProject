@@ -16,7 +16,8 @@ export default class COMMONMETHODS {
   dragAndDropLink = () =>
     this.page.locator("//a[contains(text(),'Drag and Drop')]");
 
-  sliderLink = () => this.page.locator("//a[contains(text(),'Drag & Drop Sliders')]");
+  sliderLink = () =>
+    this.page.locator("//a[contains(text(),'Drag & Drop Sliders')]");
 
   async navigate(url: string): Promise<void> {
     await this.page.goto(`${url}`);
@@ -45,13 +46,6 @@ export default class COMMONMETHODS {
     await this.uploadFileButton().setInputFiles(filepath);
     await this.page.waitForTimeout(2000);
     console.log("Uploaded the Text File successfully");
-
-    // await this.page.locator("//div[@class='zak-header-actions zak-header-actions--desktop']//a[@title='View your shopping cart']//*[name()='svg']//*[name()='path' and contains(@d,'M18.5 22c-')]").click();
-    // //input[@id='input_1']
-    // //input[@name='upload_1']
-    // const filepath = "tests/testData/SkodaSupercare.pdf";
-
-
   }
 
   async dragAndDrop(): Promise<void> {
@@ -106,26 +100,26 @@ export default class COMMONMETHODS {
       console.log("Value:", sliderBoundingBox);
 
       if (sliderBoundingBox) {
-          // Calculate the middle of the slider handle
-          const middleX = sliderBoundingBox.x + sliderBoundingBox.width / 2;
-          const middleY = sliderBoundingBox.y + sliderBoundingBox.height / 2;
+        // Calculate the middle of the slider handle
+        const middleX = sliderBoundingBox.x + sliderBoundingBox.width / 2;
+        const middleY = sliderBoundingBox.y + sliderBoundingBox.height / 2;
 
-          // Move the mouse to the middle of the slider handle and click to start dragging
-          await this.page.mouse.move(middleX, middleY);
-          await this.page.mouse.down();
+        // Move the mouse to the middle of the slider handle and click to start dragging
+        await this.page.mouse.move(middleX, middleY);
+        await this.page.mouse.down();
 
-          // Move the mouse to the desired position (adjust the coordinates based on your scenario)
-          await this.page.mouse.move(middleX - 50, middleY);
+        // Move the mouse to the desired position (adjust the coordinates based on your scenario)
+        await this.page.mouse.move(middleX - 50, middleY);
 
-          // Release the mouse to complete the drag
-          await this.page.mouse.up();
+        // Release the mouse to complete the drag
+        await this.page.mouse.up();
 
-          console.log('Slider automated successfully.');
+        console.log("Slider automated successfully.");
       } else {
-          console.error('Failed to get bounding box for the slider handle.');
+        console.error("Failed to get bounding box for the slider handle.");
       }
-  } else {
+    } else {
       console.error(`Slider handle element  not found.`);
-  }
+    }
   }
 }
