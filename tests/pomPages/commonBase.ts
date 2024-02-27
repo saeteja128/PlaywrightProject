@@ -1,9 +1,6 @@
 import path from "path";
 import { Page } from "playwright";
-import { signincolumns } from "./signIn";
 import fs from "fs";
-import { parse } from "csv-parse/sync";
-import { expect } from "@playwright/test";
 
 export default class COMMONBASE {
   protected page: Page;
@@ -44,34 +41,41 @@ export const tessDataFolder: string =
   root_dir + fileSep + "tests" + fileSep + "testData";
 console.log("Directory in Common Base: ", tessDataFolder);
 
-
 //File Path related to Signin of the user based on the user input
 export const signinData: string = tessDataFolder + fileSep + "luma_signin.csv";
 export const Signin_csvFilePath = path.resolve(__dirname, signinData);
-export const Signin_fileContent = fs.readFileSync(Signin_csvFilePath, { encoding: "utf-8" });
-
+export const Signin_fileContent = fs.readFileSync(Signin_csvFilePath, {
+  encoding: "utf-8",
+});
 
 //File Path related to Filters Selection in the Respective Product Page
-export const filterData: string = tessDataFolder + fileSep + "filter_selection1.csv";
+export const filterData: string =
+  tessDataFolder + fileSep + "filter_selection1.csv";
 export const Filter_csvFilePath = path.resolve(__dirname, filterData);
-export const Filter_fileContent = fs.readFileSync(Filter_csvFilePath, { encoding: "utf-8" });
-
+export const Filter_fileContent = fs.readFileSync(Filter_csvFilePath, {
+  encoding: "utf-8",
+});
 
 // //File Path related to Category Selection of the Product based on the user input
-export const categoryData: string = tessDataFolder + fileSep + "product_category.csv";
+export const categoryData: string =
+  tessDataFolder + fileSep + "product_category.csv";
 export const Category_csvFilePath = path.resolve(__dirname, categoryData);
-export const Category_fileContent = fs.readFileSync(Category_csvFilePath, { encoding: "utf-8" });
-
+export const Category_fileContent = fs.readFileSync(Category_csvFilePath, {
+  encoding: "utf-8",
+});
 
 // //File Path related to Price Selection of the Product based on the user input
 export const addCartData: string = tessDataFolder + fileSep + "add_cart.csv";
-export const addCart_csvFilePath = path.resolve(__dirname,addCartData);
-export const addCart_fileContent = fs.readFileSync(addCart_csvFilePath, {encoding: "utf-8"});
+export const addCart_csvFilePath = path.resolve(__dirname, addCartData);
+export const addCart_fileContent = fs.readFileSync(addCart_csvFilePath, {
+  encoding: "utf-8",
+});
 
+//Functions used
 
-//Functions used 
-
-export function removeDigitsAfterDecimalFromArray(inputArray: string[]): string[] {
+export function removeDigitsAfterDecimalFromArray(
+  inputArray: string[]
+): string[] {
   return inputArray.map((inputString) => {
     let stringWithoutDollar = inputString.replace("$", ""); //Remove Dollar Sign
     let stringWithoutDecimalDigits = stringWithoutDollar.replace(/\.\d+$/, ""); // Remove digits after decimal point
@@ -91,7 +95,3 @@ export function formatAsCurrency(value: number): string {
   const formattedValue = `$${value.toFixed(2)}`;
   return formattedValue;
 }
-
-
-
-

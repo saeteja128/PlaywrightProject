@@ -15,6 +15,8 @@ export const addCartColumns = ["product_price"];
 let productLocatorValue: string;
 let resultArray: string[];
 let PriceArray: any[];
+let locatorCountDiv4: number;
+let locatorCountDiv3: number;
 
 export let LowestProductValue: any;
 export let HighestProductValue: any;
@@ -36,6 +38,13 @@ export class ADDINGTOCART extends COMMONBASE {
         "')]"
     );
 
+  ProductPriceIndex = () =>
+    this.page.locator(
+      "(//div[@class='price-box price-final_price']/span/span/span/span[contains(text(),'" +
+        productLocatorValue +
+        "')])[1]"
+    );
+
   AddToCartDIV4CTAButton = () =>
     this.page.locator(
       "//span[contains(text(),'" +
@@ -45,13 +54,31 @@ export class ADDINGTOCART extends COMMONBASE {
         "']//ancestor::div/div/div[4]/div/div/form/button[@title='Add to Cart']"
     );
 
-  AddToCartDiv3CTAButton = () =>
+  AddToCartDIV3CTAButton = () =>
     this.page.locator(
       "//span[contains(text(),'" +
         productLocatorValue +
         "')]//ancestor::ol/li/div/div/div/span/span/span[@data-price-amount='" +
         productLocatorValue +
         "']//ancestor::div/div/div[3]/div/div/form/button[@title='Add to Cart']"
+    );
+
+  AddToCartDIV4IndexCTAButton = () =>
+    this.page.locator(
+      "(//span[contains(text(),'" +
+        productLocatorValue +
+        "')]//ancestor::ol/li/div/div/div/span/span/span[@data-price-amount='" +
+        productLocatorValue +
+        "']//ancestor::div/div/div[4]/div/div/form/button[@title='Add to Cart'])[1]"
+    );
+
+  AddToCartDIV3IndexCTAButton = () =>
+    this.page.locator(
+      "(//span[contains(text(),'" +
+        productLocatorValue +
+        "')]//ancestor::ol/li/div/div/div/span/span/span[@data-price-amount='" +
+        productLocatorValue +
+        "']//ancestor::div/div/div[3]/div/div/form/button[@title='Add to Cart'])[1]"
     );
 
   async AddingProductToCart(
@@ -66,15 +93,35 @@ export class ADDINGTOCART extends COMMONBASE {
       console.log(`The Lowest value of the product: `, LowestProductValue);
 
       productLocatorValue = LowestProductValue;
-      await this.ProductPrice().hover();
+
+      locatorCountDiv4 = await this.AddToCartDIV4CTAButton().count();
+      console.log("No of Locators available Div4: ", locatorCountDiv4);
+
+      locatorCountDiv3 = await this.AddToCartDIV3CTAButton().count();
+      console.log("No of Locators available Div3: ", locatorCountDiv3);
+
       if (
         (gender == "Men" && apparel_type == "Tops" && product_type == "Jackets") ||
-        ((gender == "Men" || "Women") && apparel_type == "Tops" && product_type == "Tees") ||
-        (gender == "Women" && apparel_type == "Bottoms" &&product_type == "Shorts")
+        (gender == "Women" && apparel_type == "Tops" && product_type == "Jackets") ||
+        (gender == "Men" || "Women" && apparel_type == "Tops" && product_type == "Tees") ||
+        (gender == "Women" && apparel_type == "Bottoms" && product_type == "Shorts") ||
+        (gender == "Women" && apparel_type == "Bottoms" && product_type == "Pants")
       ) {
-        await this.AddToCartDIV4CTAButton().click();
+        if (locatorCountDiv4 == 1) {
+          await this.ProductPrice().hover();
+          await this.AddToCartDIV4CTAButton().click();
+        } else {
+          await this.ProductPriceIndex().hover();
+          await this.AddToCartDIV4IndexCTAButton().click();
+        }
       } else {
-        await this.AddToCartDiv3CTAButton().click();
+        if (locatorCountDiv3 == 1) {
+          await this.ProductPrice().hover();
+          await this.AddToCartDIV3CTAButton().click();
+        } else {
+          await this.ProductPriceIndex().hover();
+          await this.AddToCartDIV3IndexCTAButton().click();
+        }
       }
       await this.loadState();
       console.log(
@@ -86,15 +133,35 @@ export class ADDINGTOCART extends COMMONBASE {
       console.log(`The Highest value of the product: `, HighestProductValue);
 
       productLocatorValue = HighestProductValue;
-      await this.ProductPrice().hover();
+
+      locatorCountDiv4 = await this.AddToCartDIV4CTAButton().count();
+      console.log("No of Locators available Div4: ", locatorCountDiv4);
+
+      locatorCountDiv3 = await this.AddToCartDIV3CTAButton().count();
+      console.log("No of Locators available Div3: ", locatorCountDiv3);
+
       if (
         (gender == "Men" && apparel_type == "Tops" && product_type == "Jackets") ||
-        ((gender == "Men" || "Women") && apparel_type == "Tops" && product_type == "Tees") ||
-        (gender == "Women" && apparel_type == "Bottoms" &&product_type == "Shorts")
+        (gender == "Women" && apparel_type == "Tops" && product_type == "Jackets") ||
+        (gender == "Men" || "Women" && apparel_type == "Tops" && product_type == "Tees") ||
+        (gender == "Women" && apparel_type == "Bottoms" && product_type == "Shorts") ||
+        (gender == "Women" && apparel_type == "Bottoms" && product_type == "Pants")
       ) {
-        await this.AddToCartDIV4CTAButton().click();
+        if (locatorCountDiv4 == 1) {
+          await this.ProductPrice().hover();
+          await this.AddToCartDIV4CTAButton().click();
+        } else {
+          await this.ProductPriceIndex().hover();
+          await this.AddToCartDIV4IndexCTAButton().click();
+        }
       } else {
-        await this.AddToCartDiv3CTAButton().click();
+        if (locatorCountDiv3 == 1) {
+          await this.ProductPrice().hover();
+          await this.AddToCartDIV3CTAButton().click();
+        } else {
+          await this.ProductPriceIndex().hover();
+          await this.AddToCartDIV3IndexCTAButton().click();
+        }
       }
       await this.loadState();
       console.log(
@@ -104,15 +171,34 @@ export class ADDINGTOCART extends COMMONBASE {
     } else {
       console.log("Value in CSV file: ", product_price);
       productLocatorValue = product_price;
-      await this.ProductPrice().hover();
+
+      locatorCountDiv4 = await this.AddToCartDIV4CTAButton().count();
+      console.log("No of Locators available Div4: ", locatorCountDiv4);
+
+      locatorCountDiv3 = await this.AddToCartDIV3CTAButton().count();
+      console.log("No of Locators available Div3: ", locatorCountDiv3);
+
       if (
         (gender == "Men" && apparel_type == "Tops" && product_type == "Jackets") ||
-        ((gender == "Men" || "Women") && apparel_type == "Tops" && product_type == "Tees") ||
-        (gender == "Women" && apparel_type == "Bottoms" && product_type == "Shorts")
-      ) {
-        await this.AddToCartDIV4CTAButton().click();
+        (gender == "Women" && apparel_type == "Tops" && product_type == "Jackets") ||
+        (gender == "Men" || "Women" && apparel_type == "Tops" && product_type == "Tees") ||
+        (gender == "Women" && apparel_type == "Bottoms" && product_type == "Shorts") || 
+        (gender == "Women" && apparel_type == "Bottoms" && product_type == "Pants")) {
+        if (locatorCountDiv4 == 1) {
+          await this.ProductPrice().hover();
+          await this.AddToCartDIV4CTAButton().click();
+        } else {
+          await this.ProductPriceIndex().hover();
+          await this.AddToCartDIV4IndexCTAButton().click();
+        }
       } else {
-        await this.AddToCartDiv3CTAButton().click();
+        if (locatorCountDiv3 == 1) {
+          await this.ProductPrice().hover();
+          await this.AddToCartDIV3CTAButton().click();
+        } else {
+          await this.ProductPriceIndex().hover();
+          await this.AddToCartDIV3IndexCTAButton().click();
+        }
       }
       await this.loadState();
       console.log(
