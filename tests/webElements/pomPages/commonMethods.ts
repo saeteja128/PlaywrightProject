@@ -44,7 +44,7 @@ export default class COMMONMETHODS {
 
     const filepath = "tests/testData/SkodaSupercare.pdf";
     await this.uploadFileButton().setInputFiles(filepath);
-    await this.page.waitForTimeout(2000);
+    await this.page.waitForTimeout(4000);
     console.log("Uploaded the Text File successfully");
   }
 
