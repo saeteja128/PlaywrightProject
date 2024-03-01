@@ -38,7 +38,7 @@ console.log(root_dir);
 export let fileSep = path.sep;
 console.log(fileSep);
 export const tessDataFolder: string =
-  root_dir + fileSep + "tests" + fileSep + "testData";
+  root_dir + fileSep + "tests" + fileSep + "eCommerce" + fileSep + "testData";
 console.log("Directory in Common Base: ", tessDataFolder);
 
 //File Path related to Signin of the user based on the user input

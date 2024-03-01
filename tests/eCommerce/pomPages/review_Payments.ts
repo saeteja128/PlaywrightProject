@@ -1,4 +1,4 @@
-import { Page } from "@playwright/test";
+import { Page } from "playwright";
 import COMMONBASE from "./commonBase";
 
 export class REVIEW extends COMMONBASE {

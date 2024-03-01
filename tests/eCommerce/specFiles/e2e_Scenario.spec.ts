@@ -1,4 +1,5 @@
-import { test, Page } from "@playwright/test";
+import { test } from "@playwright/test";
+import { Page } from "playwright";
 import { SIGNINPAGE, signincolumns } from "../pomPages/signIn";
 import {
   PRODUCTCATEGORYSELECTION,
