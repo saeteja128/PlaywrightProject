@@ -5,8 +5,6 @@ import fs from "fs";
 export default class COMMONBASE {
   protected page: Page;
 
-  // loadCheck = () => this.page.locator("//div[@class='loader']");
-
   constructor(page: Page) {
     this.page = page;
   }
