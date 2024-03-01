@@ -1,6 +1,6 @@
 import type { Page } from "playwright";
 import {test } from "@playwright/test"
-import COMMONMETHODS from "../commonMethods/commonMethods";
+import COMMONMETHODS from "./commonMethods";
 
 let url: string = "https://www.lambdatest.com/selenium-playground/";
 
