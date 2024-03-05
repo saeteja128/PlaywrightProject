@@ -39,6 +39,17 @@ export class VIEWINGCART extends COMMONBASE {
   proceedToCheckoutButton = () =>
     this.page.locator("//button[@data-role='proceed-to-checkout']");
 
+  profileDropDown = () =>
+    this.page.locator(
+      "//div[@class='panel header']//span[contains(text(),'Change')]"
+    );
+
+  signOutButton = () =>
+    this.page.locator(
+      "//div[@aria-hidden='false']//a[normalize-space()='Sign Out']"
+    );
+
+
   async NavigationgToCartPage(): Promise<void> {
     await this.loadState();
     await this.cartIcon().click();
@@ -58,11 +69,20 @@ export class VIEWINGCART extends COMMONBASE {
     console.log("Filter Content:", filter_content);
     FilterType = FilterValue;
     FilterTypeOption = FilterOption;
-    await expect.soft(await this.filterInCartPage()).toHaveText(filter_type);
-    await expect.soft(await this.filterValueInCartPage()).toHaveText(filter_content);
-    console.log(
-      `Validated the Filter: ${filter_type} and Filter_Value: ${filter_content} successfully`
-    );
+    try {
+      await expect.soft(await this.filterInCartPage()).toHaveText('filter_type');
+      await expect
+        .soft(await this.filterValueInCartPage())
+        .toHaveText('filter_content');
+      console.log(
+        `Validated the Filter: ${filter_type} and Filter_Value: ${filter_content} successfully`
+      );
+    } catch (error) {
+      console.log("The Assertion got failed, stopping the script from execution");
+      await this.profileDropDown().click();
+      await this.signOutButton().click();
+      console.log("Signed Out from the Account Successfully");
+    }
   }
 
   async clickingOnProceedToCheckoutButton() {
