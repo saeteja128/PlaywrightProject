@@ -1,6 +1,6 @@
 import { test } from "@playwright/test";
 import { Page } from "playwright";
-import { Signin_fileContent, Filter_fileContent, Category_fileContent, addCart_fileContent } from "../pom-pages/commonBase";
+import { FILTER_FILE_CONTENT, CATEGORY_FILE_CONTENT, ADDCART_FILE_CONTENT, SIGNIN_FILE_CONTENT } from "../pom-pages/commonBase";
 import { Review } from "../pom-pages/review_Payments";
 import { ComparingProducts, filterColumns } from "../pom-pages/selectingFilterOptions";
 import { ShippingMethod } from "../pom-pages/shippingMethod";
@@ -10,8 +10,6 @@ import { ProductCategorySelection, categoryColumns } from "../pom-pages/productC
 import { AddingToCart, addCartColumns } from "../pom-pages/addingToCart";
 import { parse } from "csv-parse/sync";
 import CommonBase from "../pom-pages/commonBase";
-
-
 
 let page: Page;
 let signInPage: SignInPage;
@@ -44,18 +42,18 @@ test.use({
   },
 });
 
-const signInrecords: any = parse(Signin_fileContent, {
+const SIGN_IN_RECORDS: any = parse(SIGNIN_FILE_CONTENT, {
   delimiter: ",",
   columns: signincolumns,
   fromLine: 2,
   skip_empty_lines: true,
 });
 
-let Signin_csvCount: number;
-Signin_csvCount = signInrecords.length;
-console.log("Records of Sign In CSV File", signInrecords);
+let signInCsvCount: number;
+signInCsvCount = SIGN_IN_RECORDS.length;
+console.log("Records of Sign In CSV File", SIGN_IN_RECORDS);
 
-const filterRecords: any = parse(Filter_fileContent, {
+const FILTER_RECORDS: any = parse(FILTER_FILE_CONTENT, {
   delimiter: ",",
   columns: filterColumns,
   fromLine: 2,
@@ -63,28 +61,28 @@ const filterRecords: any = parse(Filter_fileContent, {
 });
 
 let Filter_csvCount: number;
-Filter_csvCount = filterRecords.length;
-console.log("Records of Selected Filters CSV File", filterRecords);
+Filter_csvCount = FILTER_RECORDS.length;
+console.log("Records of Selected Filters CSV File", FILTER_RECORDS);
 
-const categoryRecords: any = parse(Category_fileContent, {
+const CATEGORY_RECORDS: any = parse(CATEGORY_FILE_CONTENT, {
   delimiter: ",",
   columns: categoryColumns,
   fromLine: 2,
   skip_empty_lines: true,
 });
-console.log("Records of Selected Filters CSV File", categoryRecords);
+console.log("Records of Selected Filters CSV File", CATEGORY_RECORDS);
 
-const addCartRecords: any = parse(addCart_fileContent, {
+const ADD_CART_RECORDS: any = parse(ADDCART_FILE_CONTENT, {
   delimiter: ",",
   columns: addCartColumns,
   fromLine: 2,
   skip_empty_lines: true,
 });
-console.log("Records of Selected Filters CSV File", addCartRecords);
+console.log("Records of Selected Filters CSV File", ADD_CART_RECORDS);
 
 test.describe("Performing the End to End TC of an e-Commerce Website", () => {
   test.setTimeout(900000);
-  for (let i = 0; i < Signin_csvCount; i++) {
+  for (let i = 0; i < signInCsvCount; i++) {
     test(`Existing User Sign In/New User Account Creation ${i}`, async () => {
       
       await test.step("Open application & navigating to Website", async () => {
@@ -92,36 +90,36 @@ test.describe("Performing the End to End TC of an e-Commerce Website", () => {
       });
 
       await test.step("User Sign In/Sign Up Step based on the CSV input", async () => {
-        await signInPage.SignIn_SignUp(signInrecords[i]);
+        await signInPage.SignIn_SignUp(SIGN_IN_RECORDS[i]);
       });
 
       await test.step("Navigating to the Product Category Page ", async () => {
         await productCategorySelection.HoveringOnGenderDropDown(
-          categoryRecords[i].gender
+          CATEGORY_RECORDS[i].gender
         );
         await productCategorySelection.HoveringApparelDropDown(
-          categoryRecords[i].gender,
-          categoryRecords[i].apparel_type
+          CATEGORY_RECORDS[i].gender,
+          CATEGORY_RECORDS[i].apparel_type
         );
         await productCategorySelection.SelectingProductOption(
-          categoryRecords[i].gender,
-          categoryRecords[i].product_type
+          CATEGORY_RECORDS[i].gender,
+          CATEGORY_RECORDS[i].product_type
         );
       });
 
       for (let j = 0; j < Filter_csvCount; j++) {
         await test.step("Selecting the Product using the Filters ", async () => {
           await comparingProducts.SelectingFilterType(
-            filterRecords[j].filter_type,
-            filterRecords[j].filter_content
+            FILTER_RECORDS[j].filter_type,
+            FILTER_RECORDS[j].filter_content
           );
         });
       }
 
       await test.step("Selecting the Product using the Filters and Adding it to the Cart ", async () => {
         await addingToCart.AddingProductToCart(
-          addCartRecords[i],
-          categoryRecords[i]
+          ADD_CART_RECORDS[i],
+          CATEGORY_RECORDS[i]
         );
       });
       
@@ -129,9 +127,9 @@ test.describe("Performing the End to End TC of an e-Commerce Website", () => {
         await viewingCart.NavigationgToCartPage();
         for (let k = 0; k < Filter_csvCount; k++) {
           await viewingCart.ValidatingFilterOfCartProduct(
-            filterRecords[k],
-            filterRecords[k].filter_type,
-            filterRecords[k].filter_content
+            FILTER_RECORDS[k],
+            FILTER_RECORDS[k].filter_type,
+            FILTER_RECORDS[k].filter_content
           );
         }
         await viewingCart.clickingOnProceedToCheckoutButton();

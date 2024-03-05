@@ -31,41 +31,41 @@ export default class CommonBase {
 
 //CSV File Path and Declaration for Sign In Screen
 
-const root_dir = process.cwd();
-console.log(root_dir);
+const ROOT_DIR = process.cwd();
+console.log(ROOT_DIR);
 export let fileSep = path.sep;
 console.log(fileSep);
-export const tessDataFolder: string =
-  root_dir + fileSep + "tests" + fileSep + "e-commerce" + fileSep + "test-data";
-console.log("Directory in Common Base: ", tessDataFolder);
+export const TESTDATAFOLDER: string =
+  ROOT_DIR + fileSep + "tests" + fileSep + "e-commerce" + fileSep + "test-data";
+console.log("Directory in Common Base: ", TESTDATAFOLDER);
 
 //File Path related to Signin of the user based on the user input
-export const signinData: string = tessDataFolder + fileSep + "luma_signin.csv";
-export const Signin_csvFilePath = path.resolve(__dirname, signinData);
-export const Signin_fileContent = fs.readFileSync(Signin_csvFilePath, {
+export const SIGNIN_DATA: string = TESTDATAFOLDER + fileSep + "luma_signin.csv";
+export const SIGNIN_CSV_FILEPATH = path.resolve(__dirname, SIGNIN_DATA);
+export const SIGNIN_FILE_CONTENT = fs.readFileSync(SIGNIN_CSV_FILEPATH, {
   encoding: "utf-8",
 });
 
 //File Path related to Filters Selection in the Respective Product Page
-export const filterData: string =
-  tessDataFolder + fileSep + "filter_selection1.csv";
-export const Filter_csvFilePath = path.resolve(__dirname, filterData);
-export const Filter_fileContent = fs.readFileSync(Filter_csvFilePath, {
+export const FILTER_DATA: string =
+  TESTDATAFOLDER + fileSep + "filter_selection1.csv";
+export const FILTER_CSV_FILEPATH = path.resolve(__dirname, FILTER_DATA);
+export const FILTER_FILE_CONTENT = fs.readFileSync(FILTER_CSV_FILEPATH, {
   encoding: "utf-8",
 });
 
 // //File Path related to Category Selection of the Product based on the user input
-export const categoryData: string =
-  tessDataFolder + fileSep + "product_category.csv";
-export const Category_csvFilePath = path.resolve(__dirname, categoryData);
-export const Category_fileContent = fs.readFileSync(Category_csvFilePath, {
+export const CATEGORY_DATA: string =
+  TESTDATAFOLDER + fileSep + "product_category.csv";
+export const CATEGORY_CSV_FILEPATH = path.resolve(__dirname, CATEGORY_DATA);
+export const CATEGORY_FILE_CONTENT = fs.readFileSync(CATEGORY_CSV_FILEPATH, {
   encoding: "utf-8",
 });
 
 // //File Path related to Price Selection of the Product based on the user input
-export const addCartData: string = tessDataFolder + fileSep + "add_cart.csv";
-export const addCart_csvFilePath = path.resolve(__dirname, addCartData);
-export const addCart_fileContent = fs.readFileSync(addCart_csvFilePath, {
+export const ADDCART_DATA: string = TESTDATAFOLDER + fileSep + "add_cart.csv";
+export const ADDCART_CSV_FILEPATH = path.resolve(__dirname, ADDCART_DATA);
+export const ADDCART_FILE_CONTENT = fs.readFileSync(ADDCART_CSV_FILEPATH, {
   encoding: "utf-8",
 });
 
