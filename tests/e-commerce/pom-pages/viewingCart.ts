@@ -70,10 +70,10 @@ export class VIEWINGCART extends COMMONBASE {
     FilterType = FilterValue;
     FilterTypeOption = FilterOption;
     try {
-      await expect.soft(await this.filterInCartPage()).toHaveText('filter_type');
+      await expect.soft(await this.filterInCartPage()).toHaveText(filter_type);
       await expect
         .soft(await this.filterValueInCartPage())
-        .toHaveText('filter_content');
+        .toHaveText(filter_content);
       console.log(
         `Validated the Filter: ${filter_type} and Filter_Value: ${filter_content} successfully`
       );

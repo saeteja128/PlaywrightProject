@@ -1,25 +1,16 @@
 import { test } from "@playwright/test";
 import { Page } from "playwright";
-import { SIGNINPAGE, signincolumns } from "../pomPages/signIn";
-import {
-  PRODUCTCATEGORYSELECTION,
-  categoryColumns,
-} from "../pomPages/productCategorySelection";
+import COMMONBASE, { Signin_fileContent, Filter_fileContent, Category_fileContent, addCart_fileContent } from "../pom-pages/commonBase";
+import { REVIEW } from "../pom-pages/review_Payments";
+import { COMPARINGPRODUCTS, filterColumns } from "../pom-pages/selectingFilterOptions";
+import { SHIPPINGMETHOD } from "../pom-pages/shippingMethod";
+import { SIGNINPAGE, signincolumns } from "../pom-pages/signIn";
+import { VIEWINGCART } from "../pom-pages/viewingCart";
+import { PRODUCTCATEGORYSELECTION, categoryColumns } from "../pom-pages/productCategorySelection";
+import { ADDINGTOCART, addCartColumns } from "../pom-pages/addingToCart";
 import { parse } from "csv-parse/sync";
-import {
-  COMPARINGPRODUCTS,
-  filterColumns,
-} from "../pomPages/selectingFilterOptions";
-import COMMONBASE, {
-  Signin_fileContent,
-  Filter_fileContent,
-  Category_fileContent,
-  addCart_fileContent,
-} from "../pomPages/commonBase";
-import { ADDINGTOCART, addCartColumns } from "../pomPages/addingToCart";
-import { VIEWINGCART } from "../pomPages/viewingCart";
-import { SHIPPINGMETHOD } from "../pomPages/shippingMethod";
-import { REVIEW } from "../pomPages/review_Payments";
+
+
 
 let page: Page;
 let signInPage: SIGNINPAGE;
