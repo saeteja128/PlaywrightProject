@@ -1,39 +1,40 @@
 import { test } from "@playwright/test";
 import { Page } from "playwright";
-import COMMONBASE, { Signin_fileContent, Filter_fileContent, Category_fileContent, addCart_fileContent } from "../pom-pages/commonBase";
-import { REVIEW } from "../pom-pages/review_Payments";
-import { COMPARINGPRODUCTS, filterColumns } from "../pom-pages/selectingFilterOptions";
-import { SHIPPINGMETHOD } from "../pom-pages/shippingMethod";
-import { SIGNINPAGE, signincolumns } from "../pom-pages/signIn";
-import { VIEWINGCART } from "../pom-pages/viewingCart";
-import { PRODUCTCATEGORYSELECTION, categoryColumns } from "../pom-pages/productCategorySelection";
-import { ADDINGTOCART, addCartColumns } from "../pom-pages/addingToCart";
+import { Signin_fileContent, Filter_fileContent, Category_fileContent, addCart_fileContent } from "../pom-pages/commonBase";
+import { Review } from "../pom-pages/review_Payments";
+import { ComparingProducts, filterColumns } from "../pom-pages/selectingFilterOptions";
+import { ShippingMethod } from "../pom-pages/shippingMethod";
+import { SignInPage, signincolumns } from "../pom-pages/signIn";
+import { ViewingCart } from "../pom-pages/viewingCart";
+import { ProductCategorySelection, categoryColumns } from "../pom-pages/productCategorySelection";
+import { AddingToCart, addCartColumns } from "../pom-pages/addingToCart";
 import { parse } from "csv-parse/sync";
+import CommonBase from "../pom-pages/commonBase";
 
 
 
 let page: Page;
-let signInPage: SIGNINPAGE;
-let commonBase: COMMONBASE;
-let productCategorySelection: PRODUCTCATEGORYSELECTION;
-let comparingProducts: COMPARINGPRODUCTS;
-let addingToCart: ADDINGTOCART;
-let viewingCart: VIEWINGCART;
-let shippingMethod: SHIPPINGMETHOD;
-let review: REVIEW;
+let signInPage: SignInPage;
+let commonBase: CommonBase;
+let productCategorySelection: ProductCategorySelection;
+let comparingProducts: ComparingProducts;
+let addingToCart: AddingToCart;
+let viewingCart: ViewingCart;
+let shippingMethod: ShippingMethod;
+let review: Review;
 
 let url: string = "https://magento.softwaretestingboard.com/";
 
 test.beforeAll(async ({ browser }) => {
   page = await browser.newPage();
-  signInPage = new SIGNINPAGE(page);
-  commonBase = new COMMONBASE(page);
-  productCategorySelection = new PRODUCTCATEGORYSELECTION(page);
-  comparingProducts = new COMPARINGPRODUCTS(page);
-  addingToCart = new ADDINGTOCART(page);
-  viewingCart = new VIEWINGCART(page);
-  shippingMethod = new SHIPPINGMETHOD(page);
-  review = new REVIEW(page);
+  signInPage = new SignInPage(page);
+  commonBase = new CommonBase(page);
+  productCategorySelection = new ProductCategorySelection(page);
+  comparingProducts = new ComparingProducts(page);
+  addingToCart = new AddingToCart(page);
+  viewingCart = new ViewingCart(page);
+  shippingMethod = new ShippingMethod(page);
+  review = new Review(page);
 });
 
 test.use({

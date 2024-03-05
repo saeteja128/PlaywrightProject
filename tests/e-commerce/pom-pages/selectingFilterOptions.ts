@@ -1,5 +1,5 @@
 import { Page } from "playwright";
-import COMMONBASE, { findLowestValue, removeDigitsAfterDecimalFromArray } from "./commonBase";
+import CommonBase, {findLowestValue, removeDigitsAfterDecimalFromArray} from "./commonBase";
 
 export interface filterRecords {
   filter_type: string;
@@ -11,7 +11,7 @@ export const filterColumns = ["filter_type", "filter_content"];
 let FilterType: string;
 let FilterTypeOption: string;
 
-export class COMPARINGPRODUCTS extends COMMONBASE {
+export class ComparingProducts extends CommonBase {
   constructor(page: Page) {
     super(page);
   }

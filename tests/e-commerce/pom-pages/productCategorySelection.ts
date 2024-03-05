@@ -1,5 +1,5 @@
 import { Page } from "playwright";
-import COMMONBASE from "./commonBase";
+import CommonBase from "./commonBase";
 
 export interface categoryRecords {
   gender: string;
@@ -13,7 +13,7 @@ let GenderType: string;
 let ApparelType: string;
 let ProductType: string;
 
-export class PRODUCTCATEGORYSELECTION extends COMMONBASE {
+export class ProductCategorySelection extends CommonBase {
   constructor(page: Page) {
     super(page);
   }
