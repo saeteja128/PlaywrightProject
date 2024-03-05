@@ -1,12 +1,12 @@
 import { Page } from "playwright";
-import COMMONBASE from "./commonBase";
 import { filterRecords } from "./selectingFilterOptions";
 import { expect } from "@playwright/test";
+import CommonBase from "./commonBase";
 
 let FilterType: string;
 let FilterTypeOption: string;
 
-export class VIEWINGCART extends COMMONBASE {
+export class ViewingCart extends CommonBase {
   constructor(page: Page) {
     super(page);
   }

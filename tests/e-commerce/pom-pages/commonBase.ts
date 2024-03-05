@@ -2,7 +2,7 @@ import path from "path";
 import { Page } from "playwright";
 import fs from "fs";
 
-export default class COMMONBASE {
+export default class CommonBase {
   protected page: Page;
 
   constructor(page: Page) {

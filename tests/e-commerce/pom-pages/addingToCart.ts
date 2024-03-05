@@ -1,8 +1,7 @@
 import { Page } from "@playwright/test";
-import COMMONBASE, { findHighestValue } from "./commonBase";
-import {
+import CommonBase, {
   removeDigitsAfterDecimalFromArray,
-  findLowestValue,
+  findLowestValue, findHighestValue
 } from "./commonBase";
 import { categoryRecords } from "./productCategorySelection";
 
@@ -21,7 +20,7 @@ let locatorCountDiv3: number;
 export let LowestProductValue: any;
 export let HighestProductValue: any;
 
-export class ADDINGTOCART extends COMMONBASE {
+export class AddingToCart extends CommonBase {
   constructor(page: Page) {
     super(page);
   }

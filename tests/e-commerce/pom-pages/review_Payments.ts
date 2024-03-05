@@ -1,7 +1,7 @@
 import { Page } from "playwright";
-import COMMONBASE from "./commonBase";
+import CommonBase from "./commonBase";
 
-export class REVIEW extends COMMONBASE {
+export class Review extends CommonBase {
   constructor(page: Page) {
     super(page);
   }

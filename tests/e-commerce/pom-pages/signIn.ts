@@ -1,5 +1,5 @@
 import { Page } from "playwright";
-import COMMONBASE from "./commonBase";
+import CommonBase from "./commonBase";
 
 interface signinrecords {
   existing_user: string;
@@ -21,7 +21,7 @@ export const signincolumns = [
   "password",
 ];
 
-export class SIGNINPAGE extends COMMONBASE {
+export class SignInPage extends CommonBase {
   constructor(page: Page) {
     super(page);
   }
