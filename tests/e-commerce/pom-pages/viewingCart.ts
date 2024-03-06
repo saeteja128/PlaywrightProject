@@ -3,8 +3,8 @@ import { filterRecords } from "./selectingFilterOptions";
 import { expect } from "@playwright/test";
 import CommonBase from "./commonBase";
 
-let FilterType: string;
-let FilterTypeOption: string;
+let filterType: string;
+let filterTypeOption: string;
 
 export class ViewingCart extends CommonBase {
   constructor(page: Page) {
@@ -24,10 +24,10 @@ export class ViewingCart extends CommonBase {
     );
   filterInCartPage = () =>
     this.page.locator(
-      "//dl[@class='item-options']/dt[text()='" + FilterType + "']"
+      "//dl[@class='item-options']/dt[text()='" + filterType + "']"
     );
   filterValueInCartPage = () =>
-    this.page.locator("//dd[contains(text(),'" + FilterTypeOption + "')]");
+    this.page.locator("//dd[contains(text(),'" + filterTypeOption + "')]");
 
   colorInCartPage = () =>
     this.page.locator(
@@ -67,8 +67,8 @@ export class ViewingCart extends CommonBase {
   ): Promise<void> {
     console.log("Filter Type:", filter_type);
     console.log("Filter Content:", filter_content);
-    FilterType = FilterValue;
-    FilterTypeOption = FilterOption;
+    filterType = FilterValue;
+    filterTypeOption = FilterOption;
     try {
       await expect.soft(await this.filterInCartPage()).toHaveText(filter_type);
       await expect

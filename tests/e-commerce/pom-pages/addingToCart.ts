@@ -3,17 +3,17 @@ import CommonBase, {
   removeDigitsAfterDecimalFromArray,
   findLowestValue, findHighestValue
 } from "./commonBase";
-import { categoryRecords } from "./productCategorySelection";
+import { Category_Records } from "./productCategorySelection";
 
-interface addCartRecords {
+interface AddCartRecords {
   product_price: any;
 }
 
-export const addCartColumns = ["product_price"];
+export const ADDCART_COLUMNS = ["product_price"];
 
 let productLocatorValue: string;
 let resultArray: string[];
-let PriceArray: any[];
+let priceArray: any[];
 let locatorCountDiv4: number;
 let locatorCountDiv3: number;
 
@@ -81,14 +81,14 @@ export class AddingToCart extends CommonBase {
     );
 
   async AddingProductToCart(
-    { product_price }: addCartRecords,
-    { gender, apparel_type, product_type }: categoryRecords
+    { product_price }: AddCartRecords,
+    { gender, apparel_type, product_type }: Category_Records
   ): Promise<any> {
     resultArray = await this.GettingPriceOfProducts().allTextContents();
-    PriceArray = removeDigitsAfterDecimalFromArray(resultArray);
+    priceArray = removeDigitsAfterDecimalFromArray(resultArray);
 
     if (product_price.trim().toLowerCase() == "lowest") {
-      LowestProductValue = findLowestValue(PriceArray);
+      LowestProductValue = findLowestValue(priceArray);
       console.log(`The Lowest value of the product: `, LowestProductValue);
 
       productLocatorValue = LowestProductValue;
@@ -128,7 +128,7 @@ export class AddingToCart extends CommonBase {
       );
       return LowestProductValue;
     } else if (product_price.trim().toLowerCase() == "highest") {
-      HighestProductValue = findHighestValue(PriceArray);
+      HighestProductValue = findHighestValue(priceArray);
       console.log(`The Highest value of the product: `, HighestProductValue);
 
       productLocatorValue = HighestProductValue;

@@ -2,12 +2,12 @@ import { test } from "@playwright/test";
 import { Page } from "playwright";
 import { FILTER_FILE_CONTENT, CATEGORY_FILE_CONTENT, ADDCART_FILE_CONTENT, SIGNIN_FILE_CONTENT } from "../pom-pages/commonBase";
 import { Review } from "../pom-pages/review_Payments";
-import { ComparingProducts, filterColumns } from "../pom-pages/selectingFilterOptions";
+import { ComparingProducts, FILTER_COLUMNS } from "../pom-pages/selectingFilterOptions";
 import { ShippingMethod } from "../pom-pages/shippingMethod";
-import { SignInPage, signincolumns } from "../pom-pages/signIn";
+import { SignInPage, SIGNIN_COLUMNS } from "../pom-pages/signIn";
 import { ViewingCart } from "../pom-pages/viewingCart";
-import { ProductCategorySelection, categoryColumns } from "../pom-pages/productCategorySelection";
-import { AddingToCart, addCartColumns } from "../pom-pages/addingToCart";
+import { ProductCategorySelection, CATEGORY_COLUMNS } from "../pom-pages/productCategorySelection";
+import { AddingToCart, ADDCART_COLUMNS } from "../pom-pages/addingToCart";
 import { parse } from "csv-parse/sync";
 import CommonBase from "../pom-pages/commonBase";
 
@@ -44,7 +44,7 @@ test.use({
 
 const SIGN_IN_RECORDS: any = parse(SIGNIN_FILE_CONTENT, {
   delimiter: ",",
-  columns: signincolumns,
+  columns: SIGNIN_COLUMNS,
   fromLine: 2,
   skip_empty_lines: true,
 });
@@ -55,7 +55,7 @@ console.log("Records of Sign In CSV File", SIGN_IN_RECORDS);
 
 const FILTER_RECORDS: any = parse(FILTER_FILE_CONTENT, {
   delimiter: ",",
-  columns: filterColumns,
+  columns: FILTER_COLUMNS,
   fromLine: 2,
   skip_empty_lines: true,
 });
@@ -66,7 +66,7 @@ console.log("Records of Selected Filters CSV File", FILTER_RECORDS);
 
 const CATEGORY_RECORDS: any = parse(CATEGORY_FILE_CONTENT, {
   delimiter: ",",
-  columns: categoryColumns,
+  columns: CATEGORY_COLUMNS,
   fromLine: 2,
   skip_empty_lines: true,
 });
@@ -74,7 +74,7 @@ console.log("Records of Selected Filters CSV File", CATEGORY_RECORDS);
 
 const ADD_CART_RECORDS: any = parse(ADDCART_FILE_CONTENT, {
   delimiter: ",",
-  columns: addCartColumns,
+  columns: ADDCART_COLUMNS,
   fromLine: 2,
   skip_empty_lines: true,
 });
