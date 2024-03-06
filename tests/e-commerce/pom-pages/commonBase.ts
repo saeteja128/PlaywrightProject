@@ -90,6 +90,6 @@ export function findHighestValue(numbers: number[]): number | undefined {
 }
 
 export function formatAsCurrency(value: number): string {
-  const formattedValue = `$${value.toFixed(2)}`;
-  return formattedValue;
+  const FORMATTEDVALUE = `$${value.toFixed(2)}`;
+  return FORMATTEDVALUE;
 }

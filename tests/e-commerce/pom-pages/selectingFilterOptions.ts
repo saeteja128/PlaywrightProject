@@ -6,10 +6,10 @@ export interface filterRecords {
   filter_content: string;
 }
 
-export const filterColumns = ["filter_type", "filter_content"];
+export const FILTER_COLUMNS = ["filter_type", "filter_content"];
 
-let FilterType: string;
-let FilterTypeOption: string;
+let filterType: string;
+let filterTypeOption: string;
 
 export class ComparingProducts extends CommonBase {
   constructor(page: Page) {
@@ -19,28 +19,28 @@ export class ComparingProducts extends CommonBase {
   SelectFilterType = () =>
     this.page.locator(
       "//div[@class='filter-options']/div/div[@class='filter-options-title'][contains(text(), '" +
-        FilterType +
+        filterType +
         "')]"
     );
 
   SelectColorFilterOption = () =>
     this.page.locator(
       "//div[@class='swatch-attribute swatch-layered color']/div/a/div[@option-label='" +
-        FilterTypeOption +
+        filterTypeOption +
         "']"
     );
 
   SelectSizeFilterOption = () =>
     this.page.locator(
       "//div[@class='swatch-attribute swatch-layered size']/div/a/div[text()='" +
-        FilterTypeOption +
+        filterTypeOption +
         "']"
     );
 
   SelectPatternFilterOption = () =>
     this.page.locator(
       "//div[@class='filter-options-content']/ol/li/a[contains(text(),'" +
-        FilterTypeOption +
+        filterTypeOption +
         "')]"
     );
 
@@ -48,39 +48,39 @@ export class ComparingProducts extends CommonBase {
     FilterValue: string,
     FilterOption: string
   ): Promise<void> {
-    FilterType = FilterValue;
-    FilterTypeOption = FilterOption;
-    switch (FilterType.trim().toLowerCase()) {
+    filterType = FilterValue;
+    filterTypeOption = FilterOption;
+    switch (filterType.trim().toLowerCase()) {
       case "size":
         await this.loadState();
         await this.SelectFilterType().click();
-        console.log(`Selected the Filter "${FilterType}" successfully`);
+        console.log(`Selected the Filter "${filterType}" successfully`);
         await this.loadState();
         await this.SelectSizeFilterOption().click();
         console.log(
-          `Selected the option "${FilterTypeOption}" in Filter "${FilterType}" successfully`
+          `Selected the option "${filterTypeOption}" in Filter "${filterType}" successfully`
         );
         break;
 
       case "color":
         await this.loadState();
         await this.SelectFilterType().click();
-        console.log(`Selected the Size Filter "${FilterType}" successfully`);
+        console.log(`Selected the Size Filter "${filterType}" successfully`);
         await this.loadState();
         await this.SelectColorFilterOption().click();
         console.log(
-          `Selected the option "${FilterTypeOption}" in Filter "${FilterType}" successfully`
+          `Selected the option "${filterTypeOption}" in Filter "${filterType}" successfully`
         );
         break;
 
       case "pattern":
         await this.loadState();
         await this.SelectFilterType().click();
-        console.log(`Selected the Size Filter "${FilterType}" successfully`);
+        console.log(`Selected the Size Filter "${filterType}" successfully`);
         await this.loadState();
         await this.SelectPatternFilterOption().click();
         console.log(
-          `Selected the option "${FilterTypeOption}" in Filter "${FilterType}" successfully`
+          `Selected the option "${filterTypeOption}" in Filter "${filterType}" successfully`
         );
         break;
 

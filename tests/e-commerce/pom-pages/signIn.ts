@@ -1,7 +1,7 @@
 import { Page } from "playwright";
 import CommonBase from "./commonBase";
 
-interface signinrecords {
+interface SignInRecords {
   existing_user: string;
   eu_username: string;
   eu_password: string;
@@ -11,7 +11,7 @@ interface signinrecords {
   password: string;
 }
 
-export const signincolumns = [
+export const SIGNIN_COLUMNS = [
   "existing_user",
   "eu_username",
   "eu_password",
@@ -77,7 +77,7 @@ export class SignInPage extends CommonBase {
     last_name,
     email,
     password,
-  }: signinrecords): Promise<void> {
+  }: SignInRecords): Promise<void> {
     if (existing_user.trim().toLocaleLowerCase() == "yes") {
         console.log("Existing User Sign In");
       await this.SignInButtonHome().click();

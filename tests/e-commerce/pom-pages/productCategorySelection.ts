@@ -1,17 +1,17 @@
 import { Page } from "playwright";
 import CommonBase from "./commonBase";
 
-export interface categoryRecords {
+export interface Category_Records {
   gender: string;
   apparel_type: string;
   product_type: string;
 }
 
-export const categoryColumns = ["gender", "apparel_type", "product_type"];
+export const CATEGORY_COLUMNS = ["gender", "apparel_type", "product_type"];
 
-let GenderType: string;
-let ApparelType: string;
-let ProductType: string;
+let genderType: string;
+let apparelType: string;
+let productType: string;
 
 export class ProductCategorySelection extends CommonBase {
   constructor(page: Page) {
@@ -21,63 +21,63 @@ export class ProductCategorySelection extends CommonBase {
   GenderDropDown = () =>
     this.page.locator(
       "//div[@class='section-item-content nav-sections-item-content']/nav/ul/li/a/span[contains(text(),'" +
-        GenderType +
+        genderType +
         "')]"
     );
 
   ApparelDropDownWomen = () =>
     this.page.locator(
       "//div[@class='section-item-content nav-sections-item-content']/nav/ul/li/ul/li/a[contains(@href,'-women')]/span[contains(text(),'" +
-        ApparelType +
+        apparelType +
         "')]"
     );
 
   ApparelDropDownMen = () =>
     this.page.locator(
       "//div[@class='section-item-content nav-sections-item-content']/nav/ul/li/ul/li/a[contains(@href,'-men')]/span[contains(text(),'" +
-        ApparelType +
+        apparelType +
         "')]"
     );
 
   ProductTypeMenButton = () =>
     this.page.locator(
       "//div[@class='section-item-content nav-sections-item-content']/nav/ul/li/ul/li/ul/li/a[contains(@href,'-men')]/span[contains(text(),'" +
-        ProductType +
+        productType +
         "')]"
     );
 
   ProductTypeWomenButton = () =>
     this.page.locator(
       "//div[@class='section-item-content nav-sections-item-content']/nav/ul/li/ul/li/ul/li/a[contains(@href,'-women')]/span[contains(text(),'" +
-        ProductType +
+        productType +
         "')]"
     );
 
   async HoveringOnGenderDropDown(GenderValue: string): Promise<void> {
-    GenderType = GenderValue;
+    genderType = GenderValue;
     await this.loadStateDomContent();
     await this.GenderDropDown().hover();
-    console.log(`Gender Type "${GenderType}" expanded in Header`);
+    console.log(`Gender Type "${genderType}" expanded in Header`);
   }
 
   async HoveringApparelDropDown(
     GenderValue: string,
     ApparelValue: string
   ): Promise<void> {
-    GenderType = GenderValue;
-    ApparelType = ApparelValue;
-    switch (GenderType.trim().toLowerCase()) {
+    genderType = GenderValue;
+    apparelType = ApparelValue;
+    switch (genderType.trim().toLowerCase()) {
       case "men":
         await this.ApparelDropDownMen().hover();
         console.log(
-          `Apparel Type "${ApparelType}" expanded under "${GenderType} Category" `
+          `Apparel Type "${apparelType}" expanded under "${genderType} Category" `
         );
         break;
 
       case "women":
         await this.ApparelDropDownWomen().hover();
         console.log(
-          `Apparel Type "${ApparelType}" expanded under "${GenderType} Category" `
+          `Apparel Type "${apparelType}" expanded under "${genderType} Category" `
         );
         break;
 
@@ -90,21 +90,21 @@ export class ProductCategorySelection extends CommonBase {
     GenderValue: string,
     ProductValue: string
   ): Promise<void> {
-    GenderType = GenderValue;
-    ProductType = ProductValue;
-    switch (GenderType.trim().toLowerCase()) {
+    genderType = GenderValue;
+    productType = ProductValue;
+    switch (genderType.trim().toLowerCase()) {
       case "men":
-        console.log(GenderType.trim().toLowerCase());
+        console.log(genderType.trim().toLowerCase());
         await this.ProductTypeMenButton().click();
         console.log(
-          `Product Type "${ProductType}" expanded under "${GenderType} Category" `
+          `Product Type "${productType}" expanded under "${genderType} Category" `
         );
         break;
 
       case "women":
         await this.ProductTypeWomenButton().click();
         console.log(
-          `Product Type "${ProductType}" expanded under "${GenderType} Category" `
+          `Product Type "${productType}" expanded under "${genderType} Category" `
         );
         break;
 
